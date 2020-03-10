@@ -49,12 +49,14 @@ class MyApp extends StatelessWidget {
             color: Color(0xFFEBE5EC),
           ),
 
+          // normal text
           bodyText1: TextStyle(
             fontSize: 10.0,
             fontWeight: FontWeight.w600,
             color: Colors.black,
           ),
 
+          // small text for labels
           bodyText2: TextStyle(
             fontSize: 6.0,
             fontWeight: FontWeight.w600,
