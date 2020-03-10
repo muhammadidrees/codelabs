@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:task_1/constants.dart';
+import 'package:task_1/ui/complain_history/coomplain_history_screen.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -8,61 +11,58 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primaryColor: Color(0xFF8460AA),
         accentColor: Color(0xFFC8C9CB),
         scaffoldBackgroundColor: Color(0xFFE7E7E9),
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
+        iconTheme: IconThemeData(
+          color: Color(0xFFEBE5EC),
+          size: app_icon_size,
+        ),
+        appBarTheme: AppBarTheme(
+          color: Colors.transparent,
+          elevation: 0.0,
+        ),
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+        textTheme: TextTheme(
 
-  final String title;
+          // used for list headers
+          headline1: TextStyle(
+            fontSize: 16.0,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF5B5B5D),
+          ),
 
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
+          // used for list title
+          headline2: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.w600,
+            color: Color(0xFFEBE5EC),
+          ),
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+          // used for statuses
+          headline3: TextStyle(
+            fontSize: 10.0,
+            fontWeight: FontWeight.w500,
+            color: Color(0xFFEBE5EC),
+          ),
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+          bodyText1: TextStyle(
+            fontSize: 10.0,
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
+          ),
 
-  @override
-  Widget build(BuildContext context) {
-    
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+          bodyText2: TextStyle(
+            fontSize: 6.0,
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+      home: ComplainHistoryScreen(title: 'OptiX'),
     );
   }
 }
