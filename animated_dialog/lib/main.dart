@@ -71,127 +71,136 @@ class MyHomePage extends StatelessWidget{
             transform: Matrix4.translationValues(curvedValue * - 280, curvedValue * 100, 0.0),
             child: Transform.rotate(
               angle: math.radians(curvedValue * 120),
-              child: Dialog(
-                backgroundColor: Colors.transparent,
-                elevation: 0.0,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(right: 16.0),
-                      child: SummaryButton(child: Text("Summary")),
-                    ),
-                    Material(
-                      elevation: 5,
-                      borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                      color: Colors.white,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                ValueText(
-                                  label: "Total Registered For Ration",
-                                  value: "123456789",
-                                ),
-                                Container(
-                                  color: Colors.blue,
-                                  height: 30.0,
-                                  width: 1.0,
-                                ),
-                                ValueText(
-                                  label: "Total Ration Delivered",
-                                  value: "123456789",
-                                ),
-                              ],
-                            ),
-
-                            SizedBox(height: 16.0),
-
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  "Date: 2 April 2020",
-                                  style: TextStyle(
-                                    color: Theme.of(context).accentColor,
-                                    fontSize: 10.0,
-                                  ),
-                                ),
-                                Text(
-                                  "Karachi Relief Trust",
-                                  style: TextStyle(
-                                    color: Theme.of(context).accentColor,
-                                    fontSize: 10.0,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            
-                            Container(
-                              color: Colors.blue,
-                              height: 1.0,
-                              width: MediaQuery.of(context).size.width,
-                            ),
-                            
-                            SizedBox(height: 16.0),
-
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                ValueText(
-                                  label: "Registered For Ration",
-                                  value: "123456789",
-                                  valueSize: 16.0,
-                                ),
-                                ValueText(
-                                  label: "Ration Delivered",
-                                  value: "1234",
-                                  valueSize: 16.0,
-                                ),
-                                ValueText(
-                                  label: "Pending Ration",
-                                  value: "123456789",
-                                  valueSize: 16.0,
-                                ),
-                              ],
-                            ),
-
-                            SizedBox(height: 16.0,),
-
-                            Align(
-                              alignment: Alignment.center,
-                              child: RaisedButton(
-                                color: Theme.of(context).primaryColor,
-                                onPressed: (){
-                                  Navigator.pop(context);
-                                },
-                                child: Text("CLOSE"),
-                              ),
-                            ),
-
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                // title: Text("Hello"),
-                // content: Text("Dil dil Pakistan"),
-              ),
+              child: SummaryDialogBox(),
             ),
           ),
         );
       }
+    );
+  }
+}
+
+class SummaryDialogBox extends StatelessWidget {
+  const SummaryDialogBox({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      elevation: 0.0,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: SummaryButton(child: Text("Summary")),
+          ),
+          Material(
+            elevation: 5,
+            borderRadius: BorderRadius.all(Radius.circular(12.0)),
+            color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      ValueText(
+                        label: "Total Registered For Ration",
+                        value: "123456789",
+                      ),
+                      Container(
+                        color: Colors.blue,
+                        height: 30.0,
+                        width: 1.0,
+                      ),
+                      ValueText(
+                        label: "Total Ration Delivered",
+                        value: "123456789",
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(height: 16.0),
+
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        "Date: 2 April 2020",
+                        style: TextStyle(
+                          color: Theme.of(context).accentColor,
+                          fontSize: 10.0,
+                        ),
+                      ),
+                      Text(
+                        "Karachi Relief Trust",
+                        style: TextStyle(
+                          color: Theme.of(context).accentColor,
+                          fontSize: 10.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                  
+                  Container(
+                    color: Colors.blue,
+                    height: 1.0,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                  
+                  SizedBox(height: 16.0),
+
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      ValueText(
+                        label: "Registered For Ration",
+                        value: "123456789",
+                        valueSize: 16.0,
+                      ),
+                      ValueText(
+                        label: "Ration Delivered",
+                        value: "1234",
+                        valueSize: 16.0,
+                      ),
+                      ValueText(
+                        label: "Pending Ration",
+                        value: "123456789",
+                        valueSize: 16.0,
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(height: 16.0,),
+
+                  Align(
+                    alignment: Alignment.center,
+                    child: RaisedButton(
+                      color: Theme.of(context).primaryColor,
+                      onPressed: (){
+                        Navigator.pop(context);
+                      },
+                      child: Text("CLOSE"),
+                    ),
+                  ),
+
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
