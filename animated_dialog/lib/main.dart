@@ -22,11 +22,26 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget{
+class MyHomePage extends StatefulWidget{
   
   MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+
+  bool showButton = true;
+
+  /// To be usead as a callback function
+  void setShowButton(bool value){
+    setState(() {
+      showButton = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +54,9 @@ class MyHomePage extends StatelessWidget{
             quarterTurns: 3,
             child: SummaryButton(
               child: Text("Summary"),
+              showButton: showButton,
               onTap: () { 
+                setShowButton(false);
                 showSummaryDialog(context);
               }, 
             ),
@@ -64,7 +81,12 @@ class MyHomePage extends StatelessWidget{
       transitionBuilder: (context, animation, secondaryAnimation, child) {
         
         final curvedValue = Curves.easeInOutBack.transform(animation.value) - 1.0;
-        
+
+        // When animation is completed make button visible
+        animation.addStatusListener((status) {
+          if (status == AnimationStatus.dismissed)
+            setShowButton(true);
+        });
         return BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
           child: Transform(
@@ -167,17 +189,17 @@ class SummaryDialogBox extends StatelessWidget {
                       ValueText(
                         label: "Registered For Ration",
                         value: "123456789",
-                        valueSize: 16.0,
+                        valueFontSize: 16.0,
                       ),
                       ValueText(
                         label: "Ration Delivered",
                         value: "1234",
-                        valueSize: 16.0,
+                        valueFontSize: 16.0,
                       ),
                       ValueText(
                         label: "Pending Ration",
                         value: "123456789",
-                        valueSize: 16.0,
+                        valueFontSize: 16.0,
                       ),
                     ],
                   ),
@@ -208,10 +230,10 @@ class SummaryDialogBox extends StatelessWidget {
 class ValueText extends StatelessWidget {
 
   final String label, value;
-  final double valueSize; 
+  final double valueFontSize; 
 
   const ValueText({
-    Key key, this.label, this.value, this.valueSize,
+    Key key, this.label, this.value, this.valueFontSize,
   }) : super(key: key);
 
   @override
@@ -231,7 +253,7 @@ class ValueText extends StatelessWidget {
           Text(
             value,
             style: TextStyle(
-              fontSize: valueSize?? 20.0,
+              fontSize: valueFontSize?? 20.0,
               fontWeight: FontWeight.w500,
               color: Theme.of(context).accentColor,
             ),
@@ -246,10 +268,15 @@ class SummaryButton extends StatelessWidget {
   final Function onTap;
   final Widget child;
   final Color buttonColor;
+
+  /// if set to true the button will be displayed else it will show
+  /// an empty container. By default it is set to true
+  final bool showButton;
   
   const SummaryButton({
-    Key key, this.onTap, @required this.child, this.buttonColor,
-  }) : super(key: key);
+    Key key, this.onTap, @required this.child, this.buttonColor, bool showButton,
+  }): this.showButton = showButton?? true,
+      super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -260,7 +287,7 @@ class SummaryButton extends StatelessWidget {
       topRight: Radius.circular(12.0),
     );
     
-    return GestureDetector(
+    return (showButton?? true)? GestureDetector(
       onTap: onTap,
       child: Material(
         elevation: 5,
@@ -274,6 +301,6 @@ class SummaryButton extends StatelessWidget {
           child: child,
         ),
       ),
-    );
+    ) : Container();
   }
 }
